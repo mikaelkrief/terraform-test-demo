@@ -19,14 +19,7 @@ locals {
 }
 
 module "storage" {
-  # source is always ../.. for test suite configurations,
-  # because they are placed two subdirectories deep under
-  # the main module directory.
   source = "../.."
-
-  # This test suite is aiming to test the "defaults" for
-  # this module, so it doesn't set any input variables
-  # and just lets their default values be selected instead.
 }
 
 resource "test_assertions" "https" {
@@ -58,7 +51,7 @@ resource "test_assertions" "storageName" {
   # in success between runs.
 
   check "storage_name" {
-    description = "storage name contain 123"
+    description = "storage name finish by 123"
     condition   = can(regex("^123", module.storage.storage_name))
   }
 
